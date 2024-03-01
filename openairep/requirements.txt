@@ -95,4 +95,6 @@ tzdata
 urllib3
 uvicorn
 websockets
+gunicorn
+whitenoise
 yarl
