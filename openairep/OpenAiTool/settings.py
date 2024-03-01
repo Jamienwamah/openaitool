@@ -29,7 +29,7 @@ SECRET_KEY = 'py%c_fz9=kst12l7j*1-uya@t+vv-_h7yckn$z9cx4ie=-2t0m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://openaitool.onrender.com']
+ALLOWED_HOSTS = ['openaitool.onrender.com']
 
 
 # Application definition
