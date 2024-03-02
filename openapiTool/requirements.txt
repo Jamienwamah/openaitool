@@ -54,6 +54,7 @@ pandas
 pillow
 pydantic
 pydantic_core
+openai
 pydub
 Pygments
 pyparsing
