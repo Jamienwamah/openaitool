@@ -1,24 +1,25 @@
 from django.http import HttpResponse
-from django.conf import settings
+#from django.conf import settings
+#from decouple import config
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
-import torch
+import openai
+#import torch
 import gradio
 
 # Load pre-trained model and tokenizer
-model_name = "gpt2"  # Use "gpt2" for GPT-2 model or specify any other model from the Hugging Face model hub
-model = GPT2LMHeadModel.from_pretrained(model_name)
-tokenizer = GPT2Tokenizer.from_pretrained(model_name)
-
-messages = [{"role": "system", "content": "You are a financial expert that specializes in real estate investment and negotiation"}]
+openai.api_key = '####'
+messages = [{"role": "system", "content": "You are a financial experts that specializes in real estate investment and negotiation"}]
 
 def CustomChatGPT(user_input):
     messages.append({"role": "user", "content": user_input})
-    input_ids = tokenizer.encode(user_input, return_tensors="pt")
-    output_ids = model.generate(input_ids, max_length=100, num_return_sequences=1)
-    ChatGPT_reply = tokenizer.decode(output_ids[0], skip_special_tokens=True)
+    response = openai.ChatCompletion.create(
+        model = "gpt-3.5-turbo",
+        messages = messages
+    )
+    ChatGPT_reply = response["choices"][0]["message"]["content"]
     messages.append({"role": "assistant", "content": ChatGPT_reply})
     return ChatGPT_reply
 
-demo = gradio.Interface(fn=CustomChatGPT, inputs="text", outputs="text", title="Real Estate Pro")
+demo = gradio.Interface(fn=CustomChatGPT, inputs = "text", outputs = "text", title = "Real Estate Pro")
 
 demo.launch(share=True)

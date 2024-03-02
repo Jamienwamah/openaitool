@@ -12,24 +12,24 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
-#from decouple import AutoConfig
+from decouple import config, AutoConfig
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-#config = AutoConfig()
+config = AutoConfig()
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'py%c_fz9=kst12l7j*1-uya@t+vv-_h7yckn$z9cx4ie=-2t0m'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['openaitool.onrender.com', '127.0.0.1:8000', '127.0.0.1', '1109888c389ae6d042.gradio.live', '127.0.0.1:7860']
+ALLOWED_HOSTS = config('ALLOWED_HOST', default='').split(',')
 
 
 # Application definition
@@ -134,3 +134,4 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+#OPEN_API_KEY = os.environ.get('OPENAI_API_KEY')
