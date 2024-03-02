@@ -90,4 +90,4 @@ urllib3
 uvicorn
 websockets
 whitenoise
-decouple
+python-decouple
